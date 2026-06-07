@@ -288,6 +288,9 @@ archives.length > 0
           <span class="badge rounded-pill ${badgeColor}">
             ${labels[idee.categorie]}
           </span>
+                <p class="text-muted small mt-2">
+                ${tempsEcoule(idee.created_at)}
+                </p>
 
           <div class="dropdown">
 
@@ -557,6 +560,10 @@ export  function VoirArchives() {
           <span class="badge rounded-pill ${couleurs[idee.categorie]}">
             ${labels[idee.categorie]}
           </span>
+          <p class="text-muted small mt-2">
+         ${tempsEcoule(idee.created_at)}
+         </p>
+        
 
           <h5 class="fw-bold mt-3">
             ${idee.titre}
@@ -589,5 +596,16 @@ export function VoirIdees(){
   document.getElementById("show-archives").style.display = "inline-block"
 
 })
+}
+
+function tempsEcoule(date) {
+  const maintenant = new Date()
+  const creation = new Date(date)
+  const diff = Math.floor((maintenant - creation) / 1000) // en secondes
+
+  if (diff < 60) return "À l'instant"
+  if (diff < 3600) return `Il y a ${Math.floor(diff / 60)} min`
+  if (diff < 86400) return `Il y a ${Math.floor(diff / 3600)} h`
+  return `Il y a ${Math.floor(diff / 86400)} j`
 }
 
